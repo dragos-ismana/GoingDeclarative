@@ -22,9 +22,12 @@ public class Repository
             : Result.Err<User>(new MissingUser());
     }
 
-    public static Result<List<Friend>> GetUserFriends(User user, bool found = true)
+    public static Result<List<Friend>> GetUserFriends(
+        User user, bool found = true)
     {
-        var friendResults = Enumerable.Range(0, 3).Select(i => GetFriend(i, found));
+        var friendResults = Enumerable
+            .Range(0, 3)
+            .Select(i => GetFriend(i, found));
         return friendResults.Traverse().Map(friends => friends.ToList());
     }
 

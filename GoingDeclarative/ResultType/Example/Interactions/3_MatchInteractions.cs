@@ -24,7 +24,8 @@ public class MatchInteractions
         return userResult.Match(
             ok: user =>
             {
-                Result<List<Friend>> friendsResult = Repository.GetUserFriends(user);
+                Result<List<Friend>> friendsResult = Repository
+                    .GetUserFriends(user);
                 return friendsResult.Match(
                     ok: friends => friends.Select(friend => friend.Name).ToList(),
                     err: ex => new List<string>());
@@ -47,8 +48,8 @@ public class MatchInteractions
     {
         return Repository.GetUser(userId).Match(
             ok: user => Repository.GetUser(secondUserId).Match(
-               ok: secondUser => Repository.GetUser(thirdUserId).Match(
-                    ok: thirdUser => Repository.MarkAsFriends(user, secondUser, thirdUser).Match(
+               ok: second => Repository.GetUser(thirdUserId).Match(
+                    ok: third => Repository.MarkAsFriends(user, second, third).Match(
                         ok: result => result,
                         err: ex => false),
                     err: ex => false),

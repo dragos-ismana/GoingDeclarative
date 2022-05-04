@@ -30,7 +30,8 @@ public static class Result
         return new Result<T>.Error(exception);
     }
 
-    public static TR Match<T, TR>(this Result<T> input, Func<T, TR> ok, Func<Exception, TR> err)
+    public static TR Match<T, TR>(
+        this Result<T> input, Func<T, TR> ok, Func<Exception, TR> err)
     {
         TR result = input switch
         {
@@ -62,7 +63,8 @@ public static class Result
 
 public static class ResultExtensions
 {
-    public static Result<IEnumerable<T>> Traverse<T>(this IEnumerable<Result<T>> results)
+    public static Result<IEnumerable<T>> Traverse<T>(
+        this IEnumerable<Result<T>> results)
     {
         var elements = new List<T>();
         foreach (var result in results)

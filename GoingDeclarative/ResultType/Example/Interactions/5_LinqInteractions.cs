@@ -57,7 +57,8 @@ public class LinqInteractions
         return markedAsFriends;
     }
 
-    public static Result<bool> Mark3AsFriends(int userId, int secondUserId, int thirdUserId)
+    public static Result<bool> Mark3AsFriends(
+        int userId, int secondUserId, int thirdUserId)
     {
         // method invocation approach
         Result<bool> _ = Repository.GetUser(userId)

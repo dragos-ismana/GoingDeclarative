@@ -38,11 +38,12 @@ public class WithoutValueResolution
                 otherUser => Repository.MarkAsFriends(user, otherUser)));
     }
 
-    public static Result<bool> Mark3AsFriends(int userId, int secondUserId, int thirdUserId)
+    public static Result<bool> Mark3AsFriends(
+        int userId, int secondUserId, int thirdUserId)
     {
         return Repository.GetUser(userId).Bind(
             user => Repository.GetUser(secondUserId).Bind(
-                secondUser => Repository.GetUser(thirdUserId).Bind(
-                    thirdUser => Repository.MarkAsFriends(user, secondUser, thirdUser))));
+                second => Repository.GetUser(thirdUserId).Bind(
+                    third => Repository.MarkAsFriends(user, second, third))));
     }
 }
