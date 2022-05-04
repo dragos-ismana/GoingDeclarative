@@ -26,8 +26,7 @@ public class LinqInteractions
     public static Result<List<string>> GetFriendsUserNames(int userId)
     {
         // method invocation approach
-        Result<List<string>> _ = Repository
-            .GetUser(userId)
+        Result<List<string>> _ = Repository.GetUser(userId)
             .SelectMany(user => Repository.GetUserFriends(user))
             .Select(friends => friends.Select(friend => friend.Name).ToList());
 
@@ -43,8 +42,7 @@ public class LinqInteractions
     public static Result<bool> MarkAsFriends(int userId, int otherUserId)
     {
         // method invocation approach
-        Result<bool> _ = Repository
-            .GetUser(userId)
+        Result<bool> _ = Repository.GetUser(userId)
             .SelectMany(user => Repository.GetUser(otherUserId)
                 .SelectMany(other => Repository.MarkAsFriends(user, other))
             );
@@ -62,8 +60,7 @@ public class LinqInteractions
     public static Result<bool> Mark3AsFriends(int userId, int secondUserId, int thirdUserId)
     {
         // method invocation approach
-        Result<bool> _ = Repository
-            .GetUser(userId)
+        Result<bool> _ = Repository.GetUser(userId)
             .Where(user => user.Id != 0)
             .SelectMany(user => Repository.GetUser(secondUserId)
                 .SelectMany(secondUser => Repository.GetUser(thirdUserId)

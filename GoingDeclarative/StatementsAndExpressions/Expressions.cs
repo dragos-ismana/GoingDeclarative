@@ -5,12 +5,12 @@ namespace GoingDeclarative.StatementsAndExpressions;
 
 public class Expressions
 {
-    public static int ExpressionIf(int x, int y, bool flag)
+    public static int If(int x, int y, bool flag)
     {
         return flag ? x : y;
     }
 
-    public static int ExpressionSwitch(int x, int y, string str)
+    public static int Switch(int x, int y, string str)
     {
         return str switch
         {
@@ -20,7 +20,7 @@ public class Expressions
         };
     }
 
-    public static int ExpressionForeach()
+    public static int Foreach()
     {
         var numbers = Enumerable.Range(0, 10);
 
@@ -29,6 +29,3 @@ public class Expressions
         return numbers.Aggregate(sum, (state, current) => state + current);
     }
 }
-
-
-

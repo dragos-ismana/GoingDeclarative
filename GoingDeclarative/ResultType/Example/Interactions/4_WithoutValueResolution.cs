@@ -20,6 +20,7 @@ public class WithoutValueResolution
     {
         Result<User> userResult = Repository.GetUser(userId);
 
+        // we don't want this.
         Result<Result<List<Friend>>> mappedValue = userResult
             .Map(user => Repository.GetUserFriends(user));
 

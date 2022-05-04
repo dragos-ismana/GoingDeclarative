@@ -40,14 +40,16 @@ public class AsyncInteractions
         return response;
     }
 
-    // Interop between Task async  and Result Async
-    public static async Task<Result<List<string>>> GetFriendsUserNamesTask(int userId)
+    public static async Task<Result<List<string>>> GetFriendsUserNamesInteropingWithTask(int userId)
     {
-        var valueFromTask = await Task.FromResult(userId);
+        var userIdFromTask = await Task.FromResult(userId);
 
-        User user = await Repository.GetUser(userId);
+        User user = await Repository.GetUser(userIdFromTask);
         List<Friend> friends = await Repository.GetUserFriends(user);
 
+        // even though we are able to await a result, when we return, we must wrap 
+        // the value in a result because there are no implicit conversions between Task<Result<>> and Task<>
+        // we could change this by defining our own TaskResult type
         return Result.Ok(friends.Select(friend => friend.Name).ToList());
     }
 }
